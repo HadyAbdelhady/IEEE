@@ -1,0 +1,23 @@
+			task 2
+A vectored interrupt is where the CPU actually knows the address of the Interrupt Service Routine in advance. All it needs is that the interrupting device sends its unique vector via a data bus and through its I/O interface to the CPU. The CPU takes this vector, checks an interrupt table in memory, and then carries out the correct ISR for that device. So the vectored interrupt allows the CPU to be able to know what ISR to carry out in software (memory).
+A non-vectored interrupt is where the interrupting device never sends an interrupt vector. An interrupt is received by the CPU, and it jumps the program counter to a fixed address in hardware. This is literally a hard coded ISR which is device agnostic. MIPS uses this via it’s syscall instruction, which is the same instruction you use regardless what device, if it is an external event notifier (e.g. keyboard input), a completion signal (e.g. print completion), a clock interrupt to tell the CPU to allocate control to a different device, or an abnormal event indicator (e.g. power failure). The CPU crucially does not know which device caused the interrupt without polling each I/O interface in a loop and checking the status register of each I/O interface to find the one with status “interrupt created”.
+		task 3
+Communication protocols are formal descriptions of digital message formats and rules. They are required to exchange messages in or between computing systems. Communication protocols are important in telecommunications systems and other systems because they create consistency and universality for the sending and receiving of messages.Communications protocols can cover authentication, error detection and correction, and signaling. They can also describe the syntax, semantics, and synchronization of analog and digital communications.Communications protocols are implemented in hardware and software. There are thousands of communications protocols that are used everywhere in analog and digital communications. Computer networks cannot exist without them.
+		task 4
+ If the reference of a function is passed to another function argument for calling, then it is called the callback function.
+In C we have to use the function pointer to call the callback function
+#include <stdio.h>
+void function()
+{
+    printf("1");
+}
+void callback_function(void (*ptr)())
+{
+    printf("2");
+    (*ptr)(); 
+}
+void main()
+{
+    void (*ptr)() = &function;
+    callback_function(ptr);
+}
